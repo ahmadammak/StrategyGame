@@ -6,6 +6,7 @@
  * Time: 10:11 AM
  */
 $settings = parse_ini_file("settings.conf");
+require_once "vendor/autoload.php";
 spl_autoload_register(function($classname){
     $classes = "classes/".$classname.".php";
     $controllers = $classname.".php";
