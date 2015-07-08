@@ -7,13 +7,14 @@
  */
 class Soldier implements JobI
 {
-    private $fights_number;
-    private $frequency;
+    protected $fights_num;
+    protected $frequency;
+    protected $prs_id;
+
     function __construct()
     {
         global $settings;
         $this->frequency = $settings['SALARY_FREQUENCY'];
-        $this->fights_number = 0;
 
     }
 
