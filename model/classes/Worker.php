@@ -33,5 +33,9 @@ class Worker implements JobI
     {
         return $this->frequency;
     }
+    public function doNextTick()
+    {
+        // TODO:
+    }
 
 }

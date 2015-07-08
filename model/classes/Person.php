@@ -46,7 +46,7 @@ class Person
      */
     public function getCityId()
     {
-        return $this->city_id;
+        return $this->cty_id;
     }
 
     public function getId()
@@ -91,6 +91,10 @@ class Person
     public function addJob(JobI $newjob)
     {
         $this->jobs[] = $newjob;
+    }
+    public function doNextTick()
+    {
+        // TODO:
     }
 
 }

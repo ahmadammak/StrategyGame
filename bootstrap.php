@@ -8,7 +8,7 @@
 $settings = parse_ini_file("settings.conf");
 require_once "vendor/autoload.php";
 spl_autoload_register(function($classname){
-    $classes = "classes/".$classname.".php";
+    $classes = "model/classes/".$classname.".php";
     $controllers = $classname.".php";
     $views =  "view/".$classname.".php";
     $models = "model/".$classname.".php";

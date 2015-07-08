@@ -194,6 +194,9 @@ class City
     {
         $this->people = $people;
     }
-
+    public function doNextTick()
+    {
+        // TODO:
+    }
 
 }

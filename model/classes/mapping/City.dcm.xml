@@ -14,7 +14,8 @@
         <field name="noh" column="noh" type="int"/>
         <field name="nop" column="nop" type="int"/>
         <field name="new_person_tick" column="new_person_tick" type="smallint"/>
-        <one-to-many target-entity="Person" mapped-by="cty_id" field="cty_id"/>
-
+        <many-to-one target-entity="User" field="usr_id">
+            <join-column name="usr_id" referenced-column-name="usr_id"/>
+        </many-to-one>
     </entity>
 </doctrine-mapping>
