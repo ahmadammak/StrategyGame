@@ -7,14 +7,14 @@
  */
 class Worker implements JobI
 {
-    private $experience_points;
-    private $frequency;
-    private $experience_frequecny;
+    protected $experience_points;
+    protected $frequency;
+    protected $experience_tick;
 
     function __construct()
     {
         global $settings;
-        $this->experience_frequecny = $settings['EXP_POINT_INCR'];
+        $this->experience_tick = $settings['EXP_POINT_INCR'];
         $this->frequency = $settings['SALARY_FREQUENCY'];
         $this->experience_points = 0;
     }

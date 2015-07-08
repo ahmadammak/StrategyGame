@@ -32,6 +32,7 @@ CREATE TABLE `sg`.`People` (
   `prs_moral` SMALLINT NOT NULL,
   `prs_health_tick` SMALLINT NOT NULL,
   `prs_salary_tick` SMALLINT NOT NULL,
+  `prs_money` INT NOT NULL,
   PRIMARY KEY (`prs_id`, `cty_id`),
   INDEX `fk_People_1_idx` (`cty_id` ASC),
   CONSTRAINT `fk_People_1`

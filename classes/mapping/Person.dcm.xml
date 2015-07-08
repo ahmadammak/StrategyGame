@@ -3,12 +3,19 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                     http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
 
-    <entity name="test" table="test">
-        <id name="id" type="integer">
+    <entity name="Person" table="People">
+        <id name="prs_id" type="bigint">
             <generator strategy="AUTO" />
         </id>
-
-        <field name="name" type="string" />
-        <one-to-many target-entity="test2" mapped-by="test_id" field="test2s"/>
+        <field name="health" column="prs_health" type="smallint" />
+        <field name="moral" column="prs_moral" type="smallint"/>
+        <field name="money" column="prs_money" type="int"/>
+        <field name="salary_tick " column="prs_health_tick" type="smallint"/>
+        <field name="health_tick" column="prs_salary_tick" type="smallint"/>
+        <one-to-one field="soldier" target-entity="Soldier" mapped-by="prs_id"/>
+        <one-to-one field="worker" target-entity="Worker" mapped-by="prs_id"/>
+        <many-to-one target-entity="City" field="cty_id" >
+            <join-column name="cty_id" referenced-column-name="id" />
+        </many-to-one>
     </entity>
 </doctrine-mapping>

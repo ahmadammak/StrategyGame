@@ -11,11 +11,19 @@ class Soldier implements JobI
     protected $frequency;
     protected $prs_id;
 
-    function __construct()
+    function __construct($prs_id = null, $fights_num = null)
     {
         global $settings;
         $this->frequency = $settings['SALARY_FREQUENCY'];
+        if($fights_num != null)
+            $this->prs_id = $prs_id;
+        if($prs_id != null)
+            $this->fights_num = $fights_num;
+    }
 
+    public function getFightsNumber()
+    {
+        return $this->fights_num;
     }
 
     public function getAttackPoints()

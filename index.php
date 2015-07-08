@@ -6,3 +6,4 @@
  * Time: 10:14 AM
  */
 require "bootstrap.php";
+echo "yes";

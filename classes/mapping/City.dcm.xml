@@ -3,12 +3,18 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                     http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
 
-    <entity name="test" table="test">
-        <id name="id" type="integer">
+    <entity name="City" table="Cities">
+        <id name="id" column="cty_id" type="bigint">
             <generator strategy="AUTO" />
         </id>
+        <id name="usr_id" column="usr_id" type="bigint" association-key="true"/>
+        <field name="money" column="cty_money" type="decimal"/>
+        <field name="houses" column="cty_houses" type="int"/>
+        <field name="job_opo" column="cty_jobs" type="int"/>
+        <field name="noh" column="noh" type="int"/>
+        <field name="nop" column="nop" type="int"/>
+        <field name="new_person_tick" column="new_person_tick" type="smallint"/>
+        <one-to-many target-entity="Person" mapped-by="cty_id" field="cty_id"/>
 
-        <field name="name" type="string" />
-        <one-to-many target-entity="test2" mapped-by="test_id" field="test2s"/>
     </entity>
 </doctrine-mapping>
