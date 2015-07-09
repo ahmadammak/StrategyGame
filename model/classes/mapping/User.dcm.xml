@@ -7,6 +7,13 @@
         <id name="usr_id" type="bigint" >
             <generator strategy="AUTO"/>
         </id>
-        <one-to-many target-entity="City" mapped-by="usr_id" field="cities"/>
+        <field name="usr_pass" column="usr_pass" type="string"/>
+        <field name="usr_name" column="usr_name" type="string"/>
+        <field name="is_online" column="is_online" type="smallint"/>
+        <one-to-many target-entity="City" mapped-by="usr_id" field="cities">
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+        </one-to-many>
     </entity>
 </doctrine-mapping>

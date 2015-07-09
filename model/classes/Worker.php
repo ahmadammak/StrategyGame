@@ -8,14 +8,14 @@
 class Worker implements JobI
 {
     protected $experience_points;
-    protected $frequency;
     protected $experience_tick;
+    protected $prs_id;
 
-    function __construct()
+    function __construct($prs_id)
     {
         global $settings;
-        $this->experience_tick = $settings['EXP_POINT_INCR'];
-        $this->frequency = $settings['SALARY_FREQUENCY'];
+        $this->prs_id = $prs_id;
+        $this->experience_tick = 0;
         $this->experience_points = 0;
     }
 
@@ -29,10 +29,6 @@ class Worker implements JobI
         // TODO: Implement getSalary() method.
     }
 
-    public function getFrequency()
-    {
-        return $this->frequency;
-    }
     public function doNextTick()
     {
         // TODO:

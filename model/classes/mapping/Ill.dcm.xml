@@ -1,0 +1,19 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                    http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
+
+    <entity name="Ill" table="Ills">
+        <id name="prs_id" type="bigint" association-key="true"/>
+        <id name="cty_id" type="bigint" association-key="true"/>
+        <one-to-one field="cty_id" target-entity="City">
+            <join-column name="cty_id" referenced-column-name="cty_id"/>
+        </one-to-one>
+        <one-to-one field="prs_id" target-entity="Person">
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+            <join-column name="prs_id" referenced-column-name="prs_id"/>
+        </one-to-one>
+    </entity>
+</doctrine-mapping>

@@ -5,7 +5,6 @@
 
     <entity name="Soldier" table="Soldiers">
         <id name="prs_id" type="bigint" association-key="true"/>
-
         <field name="fights_num" type="integer" />
         <one-to-one target-entity="Person" field="prs_id">
             <join-column name="prs_id" referenced-column-name="id" />

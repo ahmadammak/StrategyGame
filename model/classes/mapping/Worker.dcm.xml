@@ -5,8 +5,7 @@
 
     <entity name="Worker" table="Workers">
         <id name="prs_id" type="bigint" association-key="true"/>
-
-        <field name="experience_points" column="exp_points" type="int" />
+        <field name="experience_points" column="exp_points" type="integer" />
         <field name="experience_tick" column="exp_tick" type="smallint"/>
         <one-to-one target-entity="Person" field="prs_id">
             <join-column name="prs_id" referenced-column-name="id" />

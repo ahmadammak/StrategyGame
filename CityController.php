@@ -7,59 +7,73 @@
  */
 class CityController
 {
-    public static function getCityDashBoard(City $city)
+    protected $city;
+    function __construct($cityId)
+    {
+        // TODO: Implement __construct() method.
+    }
+    public static function getAllCitiesIds()
+    {
+
+    }
+    public function getUserId()
+    {
+
+    }
+
+    public function getCityDashBoard()
     {
         // TODO: return array of current statistics of given city id (population, cash money, nop, noh, ...)
     }
-    public static function addNewPersonToCity(City $city)
+    public function addNewPersonToCity()
     {
         // TODO: append new person to city people
     }
-    public static function addNewHospital(City $city)
+    public function addNewHospital()
     {
         // TODO: add new hospital
     }
-    public static function addNewJobOpo(City $city)
+    public function addNewJobOpo()
     {
         // TODO: add new job opportunity
     }
-    public static function getCityMoney(City $city)
+    public function getCityMoney()
     {
         // TODO: get total city money
     }
-    public static function recoverPersonUsingCity(Person $person)
+    public function recoverPersonUsingCity(Person $person)
     {
         // TODO: add person to hospital
     }
-    public static function getNumberOfWorkers(City $city)
+    public function getNumberOfWorkers()
     {
         // TODO:
     }
-    public static function getNumberOfSoldiers(City $city)
+    public function getNumberOfSoldiers()
     {
         // TODO:
     }
-    public static function getWorkers(City $city)
+    public function getWorkers()
     {
         // TODO: return list of workers
     }
-    public static function getSoldiers(City $city)
+    public function getSoldiers()
     {
         // TODO: return list of soldiers
     }
-    public static function giveSalariesToAllPeople(City $city)
+    public function giveSalariesToAllPeople()
     {
         // TODO:
     }
-    public static function takeTaxesFromPeople(City $city)
+    public function takeTaxesFromPeople()
     {
         // TODO:
     }
-    public static function getNumberOfBuildings(City $city)
+    public function getNumberOfBuildings()
     {
         // TODO:
     }
-    public static function doNextTick(City $city)
+    public function doNextTick()
     {
 
     }

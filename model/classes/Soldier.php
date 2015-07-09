@@ -8,17 +8,17 @@
 class Soldier implements JobI
 {
     protected $fights_num;
-    protected $frequency;
     protected $prs_id;
 
     function __construct($prs_id = null, $fights_num = null)
     {
         global $settings;
-        $this->frequency = $settings['SALARY_FREQUENCY'];
         if($fights_num != null)
-            $this->prs_id = $prs_id;
-        if($prs_id != null)
             $this->fights_num = $fights_num;
+        else
+            $this->fights_num = $settings['DEFAULT_FIGHTS_NUM'];
+        if($prs_id != null)
+            $this->prs_id= $$prs_id;
     }
 
     public function getFightsNumber()
@@ -41,9 +41,9 @@ class Soldier implements JobI
         // TODO: Implement getSalary() method.
     }
 
-    public function getFrequency()
+    public function doNextTick()
     {
-        return $this->frequency;
+        // TODO:
     }
 
 }

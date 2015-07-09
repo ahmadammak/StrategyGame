@@ -9,5 +9,4 @@ interface JobI
 {
     public function getIncomeSource();
     public function getSalary();
-    public function getFrequency();
 }

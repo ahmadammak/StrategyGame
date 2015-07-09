@@ -18,27 +18,16 @@ class Person
     protected $salary_tick;
     protected $health_tick;
 
-    function __construct($id = null, $money = null, $health = null, $moral = null, array $jobs = [])
+    function __construct($id = null, $money = null, $health = null, $moral = null)
     {
-        if($id === null){
-            global $settings;
-            // TODO: get next id from models
-//            $this->id = getNextID();
-            $this->money = 0.0;
-            $this->health = $settings['DEFAULT_HEALTH'];
-            $this->moral = $settings['DEFAULT_MORAL'];
-            $this->salary_tick = $settings['SALARY_FREQUENCY'];
-            $this->health_tick = $settings['HOSPITAL_RECOVERY_SPEED'];
-            $this->worker = null;
-            $this->soldier = null;
-        }
-        else{
-            $this->id = $id;
-            $this->moral = $moral;
-            $this->health = $health;
-            $this->jobs = $jobs;
-            $this->money = $money;
-        }
+        global $settings;
+        $this->money = 0.0;
+        $this->health = $settings['DEFAULT_HEALTH'];
+        $this->moral = $settings['DEFAULT_MORAL'];
+        $this->salary_tick = $settings['SALARY_FREQUENCY'];
+        $this->health_tick = $settings['HOSPITAL_RECOVERY_SPEED'];
+        $this->worker = null;
+        $this->soldier = null;
     }
 
     /**
@@ -72,6 +61,11 @@ class Person
         return $this->health;
     }
 
+    public function addHealth($amount)
+    {
+        $this->health += $amount;
+    }
+
     /**
      * @return null
      */
@@ -80,18 +74,68 @@ class Person
         return $this->moral;
     }
 
-    /**
-     * @return array
-     */
-    public function getJobs()
+    public function decreaseMoral($amount)
     {
-        return $this->jobs;
+        $this->moral -= $amount;
     }
 
-    public function addJob(JobI $newjob)
+    public function setWorker()
     {
-        $this->jobs[] = $newjob;
+        $this->worker = new Worker($this->getId());
     }
+    public function setSoldier($fights_num = null)
+    {
+        $this->soldier = new Soldier($this->id, $fights_num);
+    }
+
+    /**
+     * @return null
+     */
+    public function getWorker()
+    {
+        return $this->worker;
+    }
+    public function isWorker()
+    {
+        return $this->worker !== null;
+    }
+    public function isSoldier()
+    {
+        return $this->soldier !== null;
+    }
+
+    /**
+     * @return null
+     */
+    public function getSoldier()
+    {
+        return $this->soldier;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCtyId()
+    {
+        return $this->cty_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSalaryTick()
+    {
+        return $this->salary_tick;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHealthTick()
+    {
+        return $this->health_tick;
+    }
+
     public function doNextTick()
     {
         // TODO:

@@ -61,3 +61,19 @@ CREATE TABLE `sg`.`Soldiers` (
   REFERENCES `sg`.`People` (`prs_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
+
+CREATE TABLE `sg`.`Ills` (
+  `cty_id` BIGINT NOT NULL,
+  `prs_id` BIGINT NOT NULL,
+  PRIMARY KEY (`cty_id`, `prs_id`),
+  INDEX `fk_Ills_1_idx` (`prs_id` ASC),
+  CONSTRAINT `fk_Ills_1`
+  FOREIGN KEY (`prs_id`)
+  REFERENCES `sg`.`People` (`prs_id`)
+    ON DELETE CASCADE
+    ON UPDATE RESTRICT,
+  CONSTRAINT `fk_Ills_2`
+  FOREIGN KEY (`cty_id`)
+  REFERENCES `sg`.`Cities` (`cty_id`)
+    ON DELETE CASCADE
+    ON UPDATE RESTRICT);

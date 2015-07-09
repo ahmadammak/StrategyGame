@@ -7,14 +7,12 @@
  */
 class Unemployed implements JobI
 {
-    private $frequency;
     private $default_salary;
 
     function __construct()
     {
         global $settings;
         $this->default_salary = $settings['DEFAULT_SALARY'];
-        $this->frequency = $settings['SALARY_FREQUENCY'];
     }
 
     public function getIncomeSource()
@@ -27,8 +25,4 @@ class Unemployed implements JobI
         // TODO: Implement getSalary() method.
     }
 
-    public function getFrequency()
-    {
-        return $this->frequency;
-    }
 }

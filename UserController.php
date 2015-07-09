@@ -26,4 +26,8 @@ class UserController
     {
         // TODO: return array of cities that user owns
     }
+    public static function getAllUsersIds()
+    {
+        // TODO:
+    }
 }
