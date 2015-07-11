@@ -7,9 +7,6 @@
  */
 $settings = parse_ini_file("settings.conf");
 require_once "vendor/autoload.php";
-use Doctrine\ORM\Tools\Setup;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\PersistentCollection;
 spl_autoload_register(function($classname){
     $classes = "model/classes/".$classname.".php";
     $controllers = $classname.".php";
@@ -30,28 +27,3 @@ spl_autoload_register(function($classname){
     }
 });
 
-$isDevMode = true;
-$config = Setup::createXMLMetadataConfiguration(array(__DIR__."/model/classes/mapping"), $isDevMode);
-$conn = array(
-    'driver' => $settings['DRIVER'],
-    'password' => $settings['PASSWD'],
-    'dbname' => $settings['DB_NAME'],
-    'user' => $settings['USER']
-);
-
-$entityManager = EntityManager::create($conn, $config);
-
-$users = $entityManager->getRepository("User");
-$me = $users->find(4);
-echo get_class($me);
-echo "\n";
-echo $me->getUsrName();
-echo "\n";
-echo $me->getUsrPass();
-echo "\n";
-echo $me->getIsOnline();
-echo "\n";
-echo $me->getCities()->count();
-echo "\n";
-$me->getCities()->get(0)->addPerson();
-$entityManager->flush();

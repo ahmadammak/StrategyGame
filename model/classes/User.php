@@ -5,7 +5,6 @@
  * Date: 7/8/15
  * Time: 4:59 PM
  */
-use Doctrine\Common\Collections\ArrayCollection;
 class User
 {
     protected $usr_id;
