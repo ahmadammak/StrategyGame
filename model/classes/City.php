@@ -225,7 +225,7 @@ class City
     }
     public function addPerson()
     {
-        $this->people[] = new Person();
+        $this->people[] = new Person($this);
     }
     public function doNextTick()
     {

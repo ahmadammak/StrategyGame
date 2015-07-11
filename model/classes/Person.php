@@ -18,7 +18,7 @@ class Person
     protected $salary_tick;
     protected $health_tick;
 
-    function __construct($id = null, $money = null, $health = null, $moral = null)
+    function __construct($cty_id)
     {
         global $settings;
         $this->money = 0.0;
@@ -28,6 +28,7 @@ class Person
         $this->health_tick = $settings['HOSPITAL_RECOVERY_SPEED'];
         $this->worker = null;
         $this->soldier = null;
+        $this->cty_id = $cty_id;
     }
 
     /**
