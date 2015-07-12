@@ -21,8 +21,8 @@ class Person extends Model
         $this->money = 0.0;
         $this->health = $settings['DEFAULT_HEALTH'];
         $this->moral = $settings['DEFAULT_MORAL'];
-        $this->salary_tick = $settings['SALARY_FREQUENCY'];
-        $this->health_tick = $settings['HOSPITAL_RECOVERY_SPEED'];
+        $this->salary_tick = 0;
+        $this->health_tick = 0;
         $this->worker = null;
         $this->soldier = null;
     }
@@ -60,6 +60,10 @@ class Person extends Model
         $statment->bindParam(':prs_money', $prs->getMoney());
         $statment->execute();
         return $prs;
+    }
+    public function isIll()
+    {
+        return array_search($this->getId(), City::getCity($this->getCtyId())->getIlls());
     }
 
     /**
@@ -150,10 +154,6 @@ class Person extends Model
     /**
      * @return mixed
      */
-    public function getCityId()
-    {
-        return $this->cty_id;
-    }
 
     public function getId()
     {
@@ -194,6 +194,14 @@ class Person extends Model
         $statment->execute();
         $this->health += $amount;
     }
+    public function isSoldier()
+    {
+        return ((bool)Soldier::getSoldier($this->getId()));
+    }
+    public function isWorker()
+    {
+        return ((bool)Worker::getWorker($this->getId()));
+    }
 
     /**
      * @return null
@@ -232,11 +240,53 @@ class Person extends Model
     {
         return $this->health_tick;
     }
+    public function getSalary()
+    {
+        $sal = 0.0;
+        $worker = Worker::getWorker($this->getId());
+        $soldier = Soldier::getSoldier($this->getId());
+        if(!is_null($soldier))
+        {
+            $sal += $soldier->getSalary();
+        }
+        if(!is_null($worker)){
+            $sal += $worker->getSalary();
+        }
+        if(is_null($worker) && is_null($soldier))
+        {
+            $unemplyed = new Unemployed();
+            $sal += $unemplyed->getSalary();
+        }
+        return $sal;
+    }
 
-    public function doNextTick()
+    public function doNextTickForSalary()
     {
         global $settings;
-        if($this->getSalaryTick()-1 === )
+        if($this->getSalaryTick()-1 === $settings['SALARY_FREQUENCY'])
+        {
+            $this->setSalaryTick(0);
+            $this->addMoney($this->getSalary());
+        }
+        else{
+            $this->setSalaryTick($this->getSalaryTick()+1);
+        }
+    }
+    public function doNextTickForHealth()
+    {
+        global $settings;
+        if($this->getHealthTick()-1 === $settings['HOSPITAL_RECOVERY_SPEED'])
+        {
+            $this->setSalaryTick(0);
+            $this->addHealth(1);
+            if($this->getHealth() === $settings['DEFAULT_HEALTH'])
+            {
+                City::checkoutHospital($this->getId());
+            }
+        }
+        else{
+            $this->setHealthTick($this->getHealthTick()+1);
+        }
     }
 
 }

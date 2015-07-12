@@ -117,7 +117,15 @@ class Worker extends Model implements JobI
 
     public function doNextTick()
     {
-        // TODO:
+        global $settings;
+        if($this->getExperienceTick()-1 === $settings['EXP_POINT_INCR'])
+        {
+            $this->setExperiencePoints($this->getExperiencePoints()+1);
+            $this->setExperienceTick(0);
+        }
+        else{
+            $this->setExperienceTick($this->getExperienceTick()+1);
+        }
     }
 
 }

@@ -36,6 +36,7 @@ class City extends Model
         $this->new_person_tick = 0;
 
     }
+
     public static function createCity($usr_id)
     {
         $city = new City();
@@ -313,6 +314,13 @@ class City extends Model
         $statment->execute();
         $this->money = $money;
     }
+    public static function checkoutHospital($prs_id)
+    {
+        City::init();
+        $statment = City::$conn->prepare("delete from  Ills where prs_id = :cty_id");
+        $statment->bindParam(':prs_id', $prs_id);
+        $statment->execute();
+    }
 
     /**
      * @return array
@@ -332,10 +340,28 @@ class City extends Model
             $this->getAllPeople();
         }
         $people = $this->people;
+        $nop = 0;
         foreach($people as $prs_id)
         {
             $prs = Person::getPerson($prs_id);
-            $prs->doNextTick();
+            $prs->doNextTickForSalary();
+            if($prs->isIll())
+            {
+                if($nop <= $settings['HOSPITAL_CAPACITY'] * $this->getNoh())
+                {
+                    $nop += 1;
+                    $prs->doNextTickForHealth();
+
+
+                }
+
+
+            }
+            if($prs->isWorker())
+            {
+                Worker::getWorker($prs_id)->doNextTick();
+            }
+
         }
     }
 
