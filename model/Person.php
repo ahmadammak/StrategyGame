@@ -235,7 +235,8 @@ class Person extends Model
 
     public function doNextTick()
     {
-        // TODO:
+        global $settings;
+        if($this->getSalaryTick()-1 === )
     }
 
 }

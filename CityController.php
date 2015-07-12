@@ -10,10 +10,11 @@ class CityController
     protected $city;
     function __construct($cityId)
     {
-        // TODO: Implement __construct() method.
+        $this->city = City::getCity($cityId);
     }
     public static function getAllCitiesIds()
     {
+        return City::getAllCitiesIds();
 
     }
     public function getUserId()
@@ -75,6 +76,7 @@ class CityController
     }
     public function doNextTick()
     {
+        $this->city->doNextTick();
 
     }
 }

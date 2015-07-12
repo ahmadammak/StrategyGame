@@ -89,6 +89,17 @@ class City extends Model
         return null;
 
     }
+    public static function  getAllCitiesIds()
+    {
+        $arr = [];
+        $statment = User::$conn->prepare("select cty_id from Cities");
+        $statment->execute();
+        $allrows = $statment->fetchAll();
+        foreach($allrows as $row){;
+            $arr[] = $row[0];
+        }
+        return $arr;
+    }
     public function getAllPeople()
     {
         $this->people = [];
@@ -313,7 +324,19 @@ class City extends Model
 
     public function doNextTick()
     {
-        // TODO:
+        global $settings;
+        if($this->getNewPersonTick()-1 === $settings['NEW_PERSON_EACH'])
+        {
+            $this->setNewPersonTick(0);
+            Person::createPerson($this->getId());
+            $this->getAllPeople();
+        }
+        $people = $this->people;
+        foreach($people as $prs_id)
+        {
+            $prs = Person::getPerson($prs_id);
+            $prs->doNextTick();
+        }
     }
 
 }
