@@ -8,26 +8,30 @@
 class UserController
 {
     public static function logIn($username, $password){
-        // TODO: return id or null
+        $user = User::getUser($username, $password);
+        if($user !== null)
+        {
+            $_SESSION['user'] =serialize($user);
+        }
     }
     public static function logOut($id){
-        // TODO: return void
+        unset($_SESSION['user']);
     }
     public static function addUser($username, $password){
-        // TODO: return bool of success
+        User::createUser($username, $password);
     }
     public static function isUsernameExists($username){
-        // TODO: return bool
+        return User::isUserNameExists($username);
     }
     public static function isOnline($usr_id){
-        // TODO: return bool
+        return User::getUserById($usr_id)->getIsOnline();
     }
-    public static function getUserCitiesIds(User $user)
+    public static function getUserCitiesIds($usr_id)
     {
-        // TODO: return array of cities that user owns
+        return User::getUserById($usr_id)->getCitiesIds();
     }
     public static function getAllUsersIds()
     {
-        // TODO:
+        return User::getAllUsersIds();
     }
 }

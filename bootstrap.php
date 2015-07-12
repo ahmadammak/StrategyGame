@@ -5,17 +5,16 @@
  * Date: 7/6/15
  * Time: 10:11 AM
  */
+ini_set("display_errors",1);
+error_reporting(E_NOTICE);
 $settings = parse_ini_file("settings.conf");
 require_once "vendor/autoload.php";
+session_start();
 spl_autoload_register(function($classname){
-    $classes = "model/classes/".$classname.".php";
     $controllers = $classname.".php";
     $views =  "view/".$classname.".php";
     $models = "model/".$classname.".php";
 
-    if(file_exists($classes)){
-        require_once $classes;
-    }
     if(file_exists($controllers)){
         require_once $controllers;
     }
@@ -26,4 +25,3 @@ spl_autoload_register(function($classname){
         require_once $models;
     }
 });
-
